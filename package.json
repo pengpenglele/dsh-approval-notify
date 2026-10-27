@@ -1,6 +1,6 @@
 {
   "name": "dsh-win-approval-notify",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "DeepSeek Harness desktop plugin: Windows toast notifications for approval requests, questions, plan review and turn ends, with an in-app settings page.",
   "type": "module",
   "main": "index.js",

@@ -15,13 +15,26 @@ DeepSeek Harness（DSH）桌面版插件：在**需要你授权**、**等你回�
 
 ## 安装
 
-从 npm 安装（推荐），在普通 PowerShell（不是 DSH 内部的沙箱终端）里执行：
+### 方式一：在 DSH 里直接添加（推荐）
+
+1. 打开 DeepSeek Harness，点侧栏的 **插件**。
+2. 点 **添加插件**。
+3. 在输入框里填包名 `dsh-win-approval-notify`（要固定版本就写 `dsh-win-approval-notify@0.1.1`），点 **安装**。
+4. 装完**完全退出并重启 DeepSeek Harness**。
+
+> 如果默认安装源（国内镜像）还搜不到这个包，把安装源切到 **npm 官方源**再装一次。
+
+### 方式二：命令行安装
+
+在普通 PowerShell（不是 DSH 内部的沙箱终端）里执行：
 
 ```powershell
 & "<DSH 安装目录>\resources\runtime\cli\bin\dsh.cmd" plugin --profile desktop add dsh-win-approval-notify
 ```
 
-本地开发时用 link 指向 clone 下来的目录：
+### 方式三：本地开发用 link
+
+指向 clone 下来的目录：
 
 ```powershell
 & "<DSH 安装目录>\resources\runtime\cli\bin\dsh.cmd" plugin --profile desktop add "link:E:/codeDir/ds_tools/dsh-approval-notify"
