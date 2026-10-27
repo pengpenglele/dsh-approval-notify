@@ -1,0 +1,75 @@
+{
+  "name": "dsh-win-approval-notify",
+  "version": "0.1.0",
+  "description": "DeepSeek Harness desktop plugin: Windows toast notifications for approval requests, questions, plan review and turn ends, with an in-app settings page.",
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./package.json": "./package.json",
+    "./locale/*.json": "./locale/*.json"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "lib",
+    "locale",
+    "cordis.patch.yml",
+    "README.md",
+    "LICENSE"
+  ],
+  "os": [
+    "win32"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek",
+    "deepseek-harness",
+    "notification",
+    "notifications",
+    "windows",
+    "toast",
+    "approval",
+    "cordis"
+  ],
+  "author": "pengpenglele",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pengpenglele/dsh-approval-notify.git"
+  },
+  "homepage": "https://github.com/pengpenglele/dsh-approval-notify#readme",
+  "bugs": {
+    "url": "https://github.com/pengpenglele/dsh-approval-notify/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@deepseek-ai/cosmokit": "^1.8.6",
+    "@deepseek-ai/schemastery": "^3.18.5"
+  },
+  "scripts": {
+    "test": "node test/plugin.test.mjs && node test/smoke.test.mjs && node test/client.test.mjs"
+  },
+  "dsh": {
+    "engines": {
+      "dsh": ">=0.2.1-rc.2"
+    },
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "inject": [
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-ui-plugin-manager"
+      ],
+      "platform": "web"
+    }
+  }
+}

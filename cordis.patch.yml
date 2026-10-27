@@ -1,0 +1,37 @@
+# dsh-win-approval-notify bundle patch.
+#
+# One host row: index.js watches read-only session events (approval/asked,
+# tool/call for ask_user_question / exit_plan_mode, turn/end) and raises a
+# Windows toast through PowerShell 5.1 WinRT. client.js registers the row's
+# configuration page into the built-in Plugins page (plugins.row.config).
+#
+# Every key below is a Config field; the Plugins page writes these same
+# volatile fields, so this config is only the default layer.
+- insert:
+    - id: approval-notify
+      name: dsh-win-approval-notify
+      config:
+        enabled: true
+        notifyApprovals: true
+        approvalTools: []
+        notifyAskQuestion: true
+        notifyPlanReview: true
+        notifyTurnCompleted: true
+        notifyTurnError: true
+        notifyTurnBlocked: true
+        notifyTurnAborted: true
+        notifyTurnMaxTokens: true
+        cooldownSec: 20
+        debounceMs: 500
+        duration: long
+        silent: false
+        maxInflight: 3
+        includeReason: true
+        includeQuestionText: true
+        titlePrefix: DeepSeek Harness
+        appId: com.deepseek.dsh
+        skipSubagentSessions: false
+        toastTimeoutMs: 8000
+        debug: false
+        logFile: ''
+

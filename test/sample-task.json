@@ -1,0 +1,8 @@
+{
+  "title": "DeepSeek Harness · 通知测试",
+  "body": "工具：pwsh\n原因：这是一条测试通知，用于验证 Windows 通知通道。\n会话：dsh-approval-notify · test",
+  "appId": "com.deepseek.dsh",
+  "duration": "long",
+  "silent": false,
+  "cardSeconds": 8
+}
