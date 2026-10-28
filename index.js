@@ -55,7 +55,7 @@ export const Config = z.object({
   titlePrefix: z.string().default('DeepSeek Harness').volatile(),
 
   appId: z.string().default('com.deepseek.dsh').volatile(),
-  skipSubagentSessions: z.boolean().default(false).volatile(),
+  skipSubagentSessions: z.boolean().default(true).volatile(),
   toastTimeoutMs: z.number().min(1000).max(60000).default(8000).volatile(),
   debug: z.boolean().default(false).volatile(),
   logFile: z.string().default('').volatile(),
@@ -157,4 +157,5 @@ export function apply(ctx, config = {}) {
     }), 'approval-notify: diagnostic routes')
   })
 }
+
 

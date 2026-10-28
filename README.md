@@ -6,6 +6,7 @@ DeepSeek Harness（DSH）桌面版插件：在**需要你授权**、**等你回�
 - 通知里的「会话」显示**会话标题**（没有标题时用工作区目录名），不显示 session id。
 - 只读监听会话事件，不注册 `approval/request` / `user-questions/request` waterfall，不参与审批和作答。
 - 任何一个场景都能单独关闭；审批类还能按工具名白名单过滤。
+- **后台任务（子代理，比如 dsh-mnemon 的记忆整理）默认不提醒**，需要的话可以在设置页打开。
 
 ## 环境要求
 
@@ -53,7 +54,7 @@ DeepSeek Harness（DSH）桌面版插件：在**需要你授权**、**等你回�
 | 分组 | 内容 |
 | --- | --- |
 | 通知哪些情况 | 审批（+ 工具白名单）、提问、计划审阅、任务完成/出错/被拦截/被中断/达到上限（8 个独立开关） |
-| 触发与节奏 | 同会话冷却、延迟合并、并发通知上限 |
+| 触发与节奏 | 后台任务开关、同会话冷却、延迟合并、并发通知上限 |
 | 通知外观 | 停留时长、静音、标题前缀、AUMID、是否带完整原因/题目文本 |
 | 诊断 | 按场景发送测试通知、最近结果、日志路径、调试日志 |
 
@@ -84,7 +85,7 @@ $task = Join-Path $env:TEMP "dsh-toast-test.json"
 - **通知中心里有、但没有横幅弹出来**：Windows 设置 → 系统 → 通知 → 找到「DeepSeek Harness」→ 把「显示通知横幅」关一下再打开。这一步会重新把应用的横幅开关写进系统，实测能修好「通知进了中心但不弹横幅」。
 - **日志**：`%TEMP%\dsh-win-approval-notify\notify.log`，记录投递/跳过/失败；Toast 自身失败时 `%TEMP%\dsh-win-approval-notify\toast-error.log` 记录 HRESULT；`%TEMP%\dsh-win-approval-notify\diag.log` 记录系统对这个应用返回的通知状态（`Enabled` / 空），排查横幅问题用。
 - **Toast 被拒**：日志出现 `toast rejected`，插件会尝试弹一个原生置顶卡片兜底；多为 AUMID 未注册或系统通知被关，可在设置页把 AUMID 留空（用默认）或检查 Windows 通知设置。
-- **子代理刷屏**：调大冷却；v1 的 `skipSubagentSessions` 仅在会话 meta 带父会话标识时生效。
+- **后台任务也在提醒**：设置页 → 触发与节奏 → 打开「后台任务不提醒」（默认已开）。子代理和 dsh-mnemon 的记忆整理都属于这类。
 - **配置页没出现**：确认 profile 已重启、行 `approval-notify` 处于启用状态；旧版 DSH 没有 `plugins.row.config` slot，此时只能改 `cordis.patch.yml`（功能不受影响）。
 
 ## 卸载
@@ -105,4 +106,5 @@ $task = Join-Path $env:TEMP "dsh-toast-test.json"
 ## 许可
 
 MIT
+
 

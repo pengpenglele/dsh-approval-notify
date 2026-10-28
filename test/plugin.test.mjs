@@ -259,3 +259,21 @@ test('the notification body uses the session title when the title service has on
   assert.ok(!h.sent[0].body.includes('session-'))
 })
 
+
+test('background task sessions (header.origin = subagent) do not notify by default', () => {
+  const h = harness()
+  const child = { id: 'session-child', header: { origin: 'subagent' }, meta: { cwd: 'E:\\tmp' } }
+  routeEvent(h.router, child, { type: 'turn/end', seq: 1, data: { reason: { kind: 'completed' } } }, h.cfg, h.io)
+  h.clock.tick(500)
+  assert.equal(h.sent.length, 0)
+
+  routeEvent(h.router, SESSION, { type: 'turn/end', seq: 2, data: { reason: { kind: 'completed' } } }, h.cfg, h.io)
+  assert.equal(h.sent.length, 1)
+})
+
+test('turning the background-task switch off notifies subagents again', () => {
+  const h = harness({ skipSubagentSessions: false })
+  const child = { id: 'session-child-2', header: { origin: 'subagent' } }
+  routeEvent(h.router, child, { type: 'turn/end', seq: 3, data: { reason: { kind: 'completed' } } }, h.cfg, h.io)
+  assert.equal(h.sent.length, 1)
+})

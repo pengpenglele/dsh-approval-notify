@@ -30,8 +30,9 @@
         includeQuestionText: true
         titlePrefix: DeepSeek Harness
         appId: com.deepseek.dsh
-        skipSubagentSessions: false
+        skipSubagentSessions: true
         toastTimeoutMs: 8000
         debug: false
         logFile: ''
+
 

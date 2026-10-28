@@ -39,7 +39,7 @@ window.__ModuleLoader__.load({
       includeQuestionText: true,
       titlePrefix: 'DeepSeek Harness',
       appId: 'com.deepseek.dsh',
-      skipSubagentSessions: false,
+      skipSubagentSessions: true,
       toastTimeoutMs: 8000,
       debug: false,
       logFile: '',
@@ -76,6 +76,8 @@ window.__ModuleLoader__.load({
       notifyTurnAborted: 'Interrupted',
       notifyTurnMaxTokens: 'Token limit reached',
       paceTitle: 'Timing',
+      skipSubagentSessions: 'Skip background tasks',
+      skipSubagentSessionsHint: 'Subagents and background task agents (for example memory maintenance) do not notify.',
       cooldownSec: 'Cooldown per session (seconds)',
       cooldownSecHint: 'Minimum gap between two notifications of the same scene in one session.',
       debounceMs: 'Debounce (ms)',
@@ -162,6 +164,8 @@ window.__ModuleLoader__.load({
       notifyTurnAborted: '任务被中断',
       notifyTurnMaxTokens: '达到输出上限',
       paceTitle: '触发与节奏',
+      skipSubagentSessions: '后台任务不提醒',
+      skipSubagentSessionsHint: '子代理和后台任务（比如记忆整理）结束时不发通知。',
       cooldownSec: '同会话冷却（秒）',
       cooldownSecHint: '同一会话、同一场景两次提醒的最小间隔。',
       debounceMs: '延迟合并（毫秒）',
@@ -692,6 +696,14 @@ window.__ModuleLoader__.load({
           key: 'pace',
           title: t('paceTitle'),
           children: [
+            checkRow({
+              t,
+              label: t('skipSubagentSessions'),
+              hint: t('skipSubagentSessionsHint'),
+              checked: draft.skipSubagentSessions,
+              disabled,
+              onChange: (value) => edit('skipSubagentSessions', value),
+            }),
             inputRow({ t, label: t('cooldownSec'), hint: t('cooldownSecHint'), children: numeric('cooldownSec', 0, 600) }),
             inputRow({ t, label: t('debounceMs'), hint: t('debounceMsHint'), children: numeric('debounceMs', 0, 5000) }),
             inputRow({ t, label: t('maxInflight'), hint: t('maxInflightHint'), children: numeric('maxInflight', 1, 10) }),
@@ -843,4 +855,6 @@ window.__ModuleLoader__.load({
     return module.exports
   },
 })
+
+
 
